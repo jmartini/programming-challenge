@@ -13,19 +13,88 @@ let Main = React.createClass({
         return {
             size: this.props.size,
             squareSize: this.props.squareSize,
-            playing: false
+            playing: false,
+            // checkerPosition is [x, y] position on board
+            checkerPosition: [0, 0],
+            squareDirections: []
         };
+    },
+
+    /**
+    * Generates a random direction to associate with the square
+    * @returns {string} "up", "down", "left", or "right"
+    */
+    generateRandomDirection() {
+      var randomValue = Math.random() * 4;
+      switch (Math.floor(randomValue)) {
+        case 0:
+          return "up";
+        case 1:
+          return "down";
+        case 2:
+          return "left";
+        case 3:
+        default:
+          return "right";
+      }
+    },
+
+    componentWillMount: function() {
+      // Generate initial direction associated with each square
+      for (let i = 0; i < this.props.size * this.props.size; i++) {
+        this.state.squareDirections.push(this.generateRandomDirection());
+      }
+    },
+
+    componentDidMount: function() {
+      this.interval = setInterval(this.tick, 1000);
+    },
+
+    /*
+    * Advances the checker position based on the current square's direction
+    */
+    advanceChecker: function() {
+      let iCheckerPositionIndex = this.state.checkerPosition[0] +
+          this.state.checkerPosition[1] * this.props.size;
+      switch (this.state.squareDirections[iCheckerPositionIndex]) {
+        case 'up':
+          this.state.checkerPosition[1]--;
+          break;
+        case 'down':
+          this.state.checkerPosition[1]++;
+          break;
+        case 'left':
+          this.state.checkerPosition[0]--;
+          break;
+        case 'right':
+          this.state.checkerPosition[0]++;
+          break;
+        default:
+          break;
+      };
+    },
+
+    /*
+    * Returns if the checker is curently on the board
+    */
+    isCheckerOnBoard() {
+      return this.state.checkerPosition[0] < this.props.size
+        && this.state.checkerPosition[1] < this.props.size;
+    },
+
+    tick: function() {
+      if (this.isCheckerOnBoard() && this.state.playing) {
+        this.advanceChecker();
+        this.setState(this.state);
+      }
     },
 
     render() {
         return <div>
             <Controls control={this}/>
-            <Board size={this.state.size} squareSize={this.state.squareSize} isPlaying={this.getPlayState} />
+            <Board size={this.state.size} squareSize={this.state.squareSize}
+              checkerPosition={this.state.checkerPosition} squareDirections={this.state.squareDirections}/>
         </div>;
-    },
-
-    getPlayState() {
-      return this.state.playing;
     },
 
     play() {
