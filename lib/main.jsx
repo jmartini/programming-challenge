@@ -100,10 +100,10 @@ let Main = React.createClass({
     },
 
     render() {
-      let playStatusFall = this.isCheckerOnBoard() ?
-        Sound.status.STOPPED :
-        Sound.status.PLAYING;
-      let playStatusMove = this.isCheckerOnBoard() ?
+      let playStatusFall = !this.isCheckerOnBoard() && this.state.playing ?
+        Sound.status.PLAYING :
+        Sound.status.STOPPED;
+      let playStatusMove = this.isCheckerOnBoard() && this.state.playing ?
         Sound.status.PLAYING :
         Sound.status.STOPPED;
 
