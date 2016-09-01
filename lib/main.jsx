@@ -93,6 +93,9 @@ let Main = React.createClass({
       if (this.isCheckerOnBoard() && this.state.playing) {
         this.advanceChecker();
         this.setState(this.state);
+      } else if (this.state.playing){
+        this.state.playing = false;
+        this.setState(this.state);
       }
     },
 
