@@ -33,7 +33,8 @@ export default React.createClass({
         let size = (this.props.squareSize + 2) * this.props.size;
         let style = {
             width: size,
-            height: size
+            height: size,
+            opacity: this.props.checkerOnBoard ? 1.0 : 0.3
         };
         return <div style={style}>
             {squares}

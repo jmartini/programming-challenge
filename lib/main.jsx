@@ -97,7 +97,8 @@ let Main = React.createClass({
         return <div>
             <Controls control={this}/>
             <Board size={this.state.size} squareSize={this.state.squareSize}
-              checkerPosition={this.state.checkerPosition} squareDirections={this.state.squareDirections}/>
+              checkerPosition={this.state.checkerPosition} squareDirections={this.state.squareDirections}
+              checkerOnBoard={this.isCheckerOnBoard()}/>
         </div>;
     },
 
