@@ -39,11 +39,14 @@ let Main = React.createClass({
       }
     },
 
-    componentWillMount: function() {
-      // Generate initial direction associated with each square
-      for (let i = 0; i < this.props.size * this.props.size; i++) {
-        this.state.squareDirections.push(this.generateRandomDirection());
+    generateSquareDirections: function(boardSize) {
+      for (let i = 0; i < boardSize * boardSize; i++) {
+        this.state.squareDirections[i] = this.generateRandomDirection();
       }
+    },
+
+    componentWillMount: function() {
+      this.generateSquareDirections(this.props.size);
       this.reset();
     },
 
@@ -116,7 +119,11 @@ let Main = React.createClass({
 
     setSize() {
         //we update our internal state.
-        this.state.size = 7;
+        let largeSize = this.props.size * 2;
+        this.state.size = this.state.size === this.props.size ?
+          this.state.size = largeSize :
+          this.state.size = this.props.size;
+        this.generateSquareDirections(this.state.size);
         //setting our state forces a rerender, which in turn will call the render() method
         //of this class. This is how everything gets redrawn and how you 'react' to user input
         //to change the state of the DOM.
