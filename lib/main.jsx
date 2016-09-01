@@ -41,6 +41,7 @@ let Main = React.createClass({
     },
 
     generateSquareDirections: function(boardSize) {
+      this.state.squareDirections.length = boardSize * boardSize;
       for (let i = 0; i < boardSize * boardSize; i++) {
         this.state.squareDirections[i] = this.generateRandomDirection();
       }
