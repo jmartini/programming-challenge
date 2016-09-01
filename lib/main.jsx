@@ -59,7 +59,7 @@ let Main = React.createClass({
     */
     advanceChecker: function() {
       let iCheckerPositionIndex = this.state.checkerPosition[0] +
-          this.state.checkerPosition[1] * this.props.size;
+          this.state.checkerPosition[1] * this.state.size;
       switch (this.state.squareDirections[iCheckerPositionIndex]) {
         case 'up':
           this.state.checkerPosition[1]--;
