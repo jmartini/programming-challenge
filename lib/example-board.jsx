@@ -1,6 +1,7 @@
 import React from 'react';
 //notice we use the relative path syntax when loading local files
 import Square from './example-square'
+import isPositionInCycle from './cycleChecker'
 
 export default React.createClass({
     getInitialState() {
@@ -19,7 +20,11 @@ export default React.createClass({
             for(let j = 0; j < this.props.size; j++) {
                 let color = key++ % 2 == 0 ? '#333333' : '#BBBBBB';
                 if (j === this.props.checkerPosition[0] && i === this.props.checkerPosition[1]) {
-                  color = '#8080ff';
+                  if (isPositionInCycle(this.props.checkerPosition[0], this.props.checkerPosition[1], this.props.squareDirections)) {
+                    color = '#4dff88';
+                  } else {
+                    color = '#8080ff';
+                  }
                 }
                 let iDirection = i * this.props.size + j;
                 squares.push(<Square key={key} size={this.props.squareSize} color={color} direction={this.props.squareDirections[iDirection]} />)
