@@ -13,25 +13,6 @@ export default React.createClass({
     },
 
     /**
-    * Generates a random direction to associate with the square
-    * @returns {string} "up", "down", "left", or "right"
-    */
-    generateRandomDirection() {
-      var randomValue = Math.random() * 4;
-      switch (Math.floor(randomValue)) {
-        case 0:
-          return "up";
-        case 1:
-          return "down";
-        case 2:
-          return "left";
-        case 3:
-        default:
-          return "right";
-      }
-    },
-
-    /**
      * This must return a JSX element.
      * @returns {XML}
      */
@@ -44,11 +25,10 @@ export default React.createClass({
             height: this.props.size,
             backgroundColor: this.props.color
         };
-        let direction = this.generateRandomDirection();
         //To set a div's class in React you must use the 'className' attribute, instead of the
         //usual 'class' attribute. This is because 'class' is a reserved keyword in ECMAScript 6.
         return <div className='square' ref='square' style={style}>
-          <Arrow direction={direction} />
+          <Arrow direction={this.props.direction} />
         </div>;
     },
 
