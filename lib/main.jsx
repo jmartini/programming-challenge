@@ -44,6 +44,7 @@ let Main = React.createClass({
       for (let i = 0; i < this.props.size * this.props.size; i++) {
         this.state.squareDirections.push(this.generateRandomDirection());
       }
+      this.reset();
     },
 
     componentDidMount: function() {
@@ -106,7 +107,11 @@ let Main = React.createClass({
     },
 
     reset() {
-        console.log("Reset");
+        let xPosition = Math.floor(Math.random() * this.state.size);
+        let yPosition = Math.floor(Math.random() * this.state.size);
+        this.state.checkerPosition[0] = xPosition;
+        this.state.checkerPosition[1] = yPosition;
+        this.setState(this.state);
     },
 
     setSize() {
