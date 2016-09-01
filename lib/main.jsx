@@ -82,8 +82,10 @@ let Main = React.createClass({
     * Returns if the checker is curently on the board
     */
     isCheckerOnBoard() {
-      return this.state.checkerPosition[0] < this.props.size
-        && this.state.checkerPosition[1] < this.props.size;
+      return this.state.checkerPosition[0] < this.state.size
+        && this.state.checkerPosition[1] < this.state.size
+        && this.state.checkerPosition[0] >= 0
+        && this.state.checkerPosition[1] >= 0;
     },
 
     tick: function() {
