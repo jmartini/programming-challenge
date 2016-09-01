@@ -12,23 +12,28 @@ let Main = React.createClass({
     getInitialState() {
         return {
             size: this.props.size,
-            squareSize: this.props.squareSize
+            squareSize: this.props.squareSize,
+            playing: false
         };
     },
 
     render() {
         return <div>
             <Controls control={this}/>
-            <Board size={this.state.size} squareSize={this.state.squareSize}/>
+            <Board size={this.state.size} squareSize={this.state.squareSize} isPlaying={this.getPlayState} />
         </div>;
     },
 
+    getPlayState() {
+      return this.state.playing;
+    },
+
     play() {
-        console.log("Play");
+        this.state.playing = true;
     },
 
     stop() {
-        console.log("Stop");
+        this.state.playing = false;
     },
 
     reset() {

@@ -65,8 +65,13 @@ export default React.createClass({
       };
     },
 
+    isCheckerOnBoard() {
+      return this.state.checkerPosition[0] < this.props.size
+        && this.state.checkerPosition[1] < this.props.size;
+    },
+
     tick: function() {
-      if (this.state.checkerPosition[0] < this.props.size) {
+      if (this.isCheckerOnBoard() && this.props.isPlaying()) {
         this.advanceChecker();
         this.setState(this.state);
       }
