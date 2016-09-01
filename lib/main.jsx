@@ -2,6 +2,7 @@
 import React from 'react';
 import Board from './example-board';
 import Controls from './example-controls';
+import Sound from 'react-sound';
 
 //get the content DOMElemet create in index.html
 let content = document.getElementById('content');
@@ -96,11 +97,21 @@ let Main = React.createClass({
     },
 
     render() {
+      let playStatusFall = this.isCheckerOnBoard() ?
+        Sound.status.STOPPED :
+        Sound.status.PLAYING;
+      let playStatusMove = this.isCheckerOnBoard() ?
+        Sound.status.PLAYING :
+        Sound.status.STOPPED;
+
         return <div>
             <Controls control={this}/>
             <Board size={this.state.size} squareSize={this.state.squareSize}
               checkerPosition={this.state.checkerPosition} squareDirections={this.state.squareDirections}
               checkerOnBoard={this.isCheckerOnBoard()}/>
+
+            <Sound url='./assets/move.wav' playStatus={playStatusMove} />
+            <Sound url='./assets/fall.wav' playStatus={playStatusFall} />
         </div>;
     },
 
