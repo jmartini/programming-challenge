@@ -16,19 +16,23 @@
   text-align: center;
 }
 
-.controls .actions .btn {
+.controls .btn-toolbar .btn-group {
+  float: none;
+}
+
+.controls .btn {
   border: 0px;
 }
 
-.controls .actions .btn:focus {
+.controls .btn:focus {
   background-color: transparent;
   outline: none;
 }
 
-.controls .actions .btn:hover {
+.controls .btn:hover {
   background-color: transparent;
 }
 
-.controls .actions .btn:active {
+.controls .btn:active {
   box-shadow: none;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 //this syntax is called obejct destructing.
-import {Button, ButtonToolbar, Glyphicon} from 'react-bootstrap'
+import {Button, ButtonToolbar, Glyphicon, DropdownButton, MenuItem} from 'react-bootstrap'
 
 export default React.createClass({
     getInitialState() {
@@ -20,19 +20,15 @@ export default React.createClass({
       }
 
         return <div className='controls'>
-          <div className='actions'>
-            <ButtonToolbar>
-              <Button bsSize="large" onClick={this.onPlay} style={playStyle}><Glyphicon glyph="play" /></Button>
-              <Button bsSize="large" onClick={this.onStop} style={stopStyle}><Glyphicon glyph="pause" /></Button>
-              <Button bsSize="large" onClick={this.onReset}><Glyphicon glyph="refresh" /></Button>
-            </ButtonToolbar>
-          </div>
-          <div className='options'>
-            <ButtonToolbar>
-              <Button onClick={this.onSetSize}>Toggle Size</Button>
-              <Button onClick={this.onShuffleArrows}>Shuffle Arrows</Button>
-            </ButtonToolbar>
-          </div>
+          <ButtonToolbar>
+            <Button bsSize="large" onClick={this.onPlay} style={playStyle}><Glyphicon glyph="play" /></Button>
+            <Button bsSize="large" onClick={this.onStop} style={stopStyle}><Glyphicon glyph="pause" /></Button>
+            <Button bsSize="large" onClick={this.onReset}><Glyphicon glyph="refresh" /></Button>
+            <DropdownButton title="Options" id='1'>
+              <MenuItem onSelect={this.onSetSize}>Toggle Size</MenuItem>
+              <MenuItem onSelect={this.onShuffleArrows}>Shuffle Arrows</MenuItem>
+            </DropdownButton>
+          </ButtonToolbar>
         </div>
     },
 
