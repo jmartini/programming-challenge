@@ -109,10 +109,10 @@ let Main = React.createClass({
         Sound.status.STOPPED;
 
         return <div>
-            <Controls control={this}/>
             <Board size={this.state.size} squareSize={this.state.squareSize}
               checkerPosition={this.state.checkerPosition} squareDirections={this.state.squareDirections}
               checkerOnBoard={this.isCheckerOnBoard()}/>
+            <Controls control={this} playing={this.state.playing}/>
 
             <Sound url='./assets/move.wav' playStatus={playStatusMove} />
             <Sound url='./assets/fall.wav' playStatus={playStatusFall} />

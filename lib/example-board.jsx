@@ -36,7 +36,7 @@ export default React.createClass({
             height: size,
             opacity: this.props.checkerOnBoard ? 1.0 : 0.3
         };
-        return <div style={style}>
+        return <div className="board" style={style}>
             {squares}
         </div>;
     }

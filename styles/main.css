@@ -7,3 +7,28 @@
     border: 1px solid #777777;
     float: left;
 }
+
+.board {
+  margin: 0 auto;
+}
+
+.controls {
+  text-align: center;
+}
+
+.controls .actions .btn {
+  border: 0px;
+}
+
+.controls .actions .btn:focus {
+  background-color: transparent;
+  outline: none;
+}
+
+.controls .actions .btn:hover {
+  background-color: transparent;
+}
+
+.controls .actions .btn:active {
+  box-shadow: none;
+}
