@@ -121,10 +121,12 @@ let Main = React.createClass({
 
     play() {
         this.state.playing = true;
+        this.setState(this.state);
     },
 
     stop() {
         this.state.playing = false;
+        this.setState(this.state);
     },
 
     reset() {
