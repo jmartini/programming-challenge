@@ -41,15 +41,16 @@ export default React.createClass({
     render() {
 
         let squares = this.generateSquares();
-        let size = (this.props.squareSize + 2) * this.props.size;
+        let boardSize = this.props.squareSize * this.props.size;
+        let sizeWithBorder = boardSize + 2 * this.props.size;
         let style = {
-            width: size,
-            height: size,
+            width: sizeWithBorder,
+            height: sizeWithBorder,
             opacity: this.props.checkerOnBoard ? 1.0 : 0.3
         };
         return <div className="board" style={style}>
             {squares}
-            <Checker boardSize={size} checkerTargetPosition={this.props.checkerPosition}
+            <Checker boardSize={boardSize} checkerTargetPosition={this.props.checkerPosition}
               squareSize={this.props.squareSize} playing={this.props.playing}
               snapPosition={this.props.snapPosition}/>
         </div>;
