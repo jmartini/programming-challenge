@@ -62,10 +62,20 @@ export default React.createClass({
       let velocity = 2;
 
       if (currentPosition != targetPosition) {
-        let xDirection = targetPosition[0] > currentPosition[0] ? 1 : -1;
-        let yDirection = targetPosition[1] > currentPosition[1] ? 1 : -1;
-        this.state.checkerSprite.x += velocity * xDirection;
-        this.state.checkerSprite.y += velocity * yDirection;
+        let xVector = targetPosition[0] - currentPosition[0];
+        let yVector = targetPosition[1] - currentPosition[1];
+
+        if (Math.abs(xVector) < velocity) {
+          this.state.checkerSprite.x = targetPosition[0];
+        } else {
+          this.state.checkerSprite.x += velocity * Math.sign(xVector);
+        }
+
+        if (Math.abs(yVector) < velocity) {
+          this.state.checkerSprite.y = targetPosition[1];
+        } else {
+          this.state.checkerSprite.y += velocity * Math.sign(yVector);
+        }
       }
     }
 
