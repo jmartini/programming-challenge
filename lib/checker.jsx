@@ -44,20 +44,23 @@ export default React.createClass({
   */
   animate() {
     this.frame = requestAnimationFrame(this.animate);
-    let squareSize = this.props.squareSize;
-    let targetPosition = this.props.checkerTargetPosition;
-    let currentPosition = [this.state.checkerSprite.x, this.state.checkerSprite.y]
 
-    // Translate targetPosition, which is in square index, to pixels
-    targetPosition = targetPosition.map(function(x) {return x * squareSize});
+    if (this.props.playing) {
+      let squareSize = this.props.squareSize;
+      let targetPosition = this.props.checkerTargetPosition;
+      let currentPosition = [this.state.checkerSprite.x, this.state.checkerSprite.y]
 
-    let velocity = 2;
+      // Translate targetPosition, which is in square index, to pixels
+      targetPosition = targetPosition.map(function(x) {return x * squareSize});
 
-    if (currentPosition != targetPosition) {
-      let xDirection = targetPosition[0] > currentPosition[0] ? 1 : -1;
-      let yDirection = targetPosition[1] > currentPosition[1] ? 1 : -1;
-      this.state.checkerSprite.x += velocity * xDirection;
-      this.state.checkerSprite.y += velocity * yDirection;
+      let velocity = 2;
+
+      if (currentPosition != targetPosition) {
+        let xDirection = targetPosition[0] > currentPosition[0] ? 1 : -1;
+        let yDirection = targetPosition[1] > currentPosition[1] ? 1 : -1;
+        this.state.checkerSprite.x += velocity * xDirection;
+        this.state.checkerSprite.y += velocity * yDirection;
+      }
     }
 
     this.renderer.render(this.stage);

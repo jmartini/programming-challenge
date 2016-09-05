@@ -111,7 +111,7 @@ let Main = React.createClass({
         return <div>
             <Board size={this.state.size} squareSize={this.state.squareSize}
               checkerPosition={this.state.checkerPosition} squareDirections={this.state.squareDirections}
-              checkerOnBoard={this.isCheckerOnBoard()}/>
+              checkerOnBoard={this.isCheckerOnBoard()} playing={this.state.playing}/>
             <Controls control={this} playing={this.state.playing}/>
 
             <Sound url='./assets/move.wav' playStatus={playStatusMove} />
