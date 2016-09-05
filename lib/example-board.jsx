@@ -19,12 +19,12 @@ export default React.createClass({
         let key = 0;
         for(let i = 0; i < this.props.size; i++) {
             for(let j = 0; j < this.props.size; j++) {
-                let color = key++ % 2 == 0 ? '#333333' : '#BBBBBB';
+                let color = key++ % 2 == 0 ? '#D9D9D9' : '#BFBFBF';
                 if (j === this.props.checkerPosition[0] && i === this.props.checkerPosition[1]) {
                   if (isPositionInCycle(this.props.checkerPosition[0], this.props.checkerPosition[1], this.props.squareDirections)) {
-                    color = '#4dff88';
+                    color = '#FF462E';
                   } else {
-                    color = '#8080ff';
+                    color = '#2DBCDD';
                   }
                 }
                 let iDirection = i * this.props.size + j;
