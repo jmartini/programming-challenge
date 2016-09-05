@@ -11,7 +11,8 @@ export default React.createClass({
 
   componentDidMount() {
     // Create PIXI render. This is the display area, so match to the size of the board.
-    this.renderer = PIXI.autoDetectRenderer(this.props.boardSize, this.props.boardSize, {transparent: true}, true);
+    this.renderer = PIXI.autoDetectRenderer(this.props.boardSize,
+      this.props.boardSize, {transparent: true}, true);
     this.renderer.autoResize = true;
     this.refs.gameCanvas.getDOMNode().appendChild(this.renderer.view);
 
@@ -41,50 +42,60 @@ export default React.createClass({
   },
 
   /*
-  * Moves sprite toward target position. Called 60 times per second
+  * Animation loop. Called 60 timers per second.
   */
   animate() {
     let boardSizePixels = this.props.boardSize;
     this.renderer.resize(boardSizePixels, boardSizePixels);
 
-    this.frame = requestAnimationFrame(this.animate);
+    requestAnimationFrame(this.animate);
 
     let squareSize = this.props.squareSize;
     let targetPosition = this.props.checkerTargetPosition;
-    let currentPosition = [this.state.checkerSprite.x, this.state.checkerSprite.y]
 
     // Translate targetPosition, which is in square index, to pixels
     targetPosition = targetPosition.map(function(x) {return x * squareSize});
+
     if (this.props.snapPosition) {
       this.state.checkerSprite.x = targetPosition[0];
       this.state.checkerSprite.y = targetPosition[1];
     } else if (this.props.playing) {
-      let velocity = 2;
-
-      if (currentPosition != targetPosition) {
-        let xVector = targetPosition[0] - currentPosition[0];
-        let yVector = targetPosition[1] - currentPosition[1];
-
-        if (Math.abs(xVector) < velocity) {
-          this.state.checkerSprite.x = targetPosition[0];
-        } else {
-          this.state.checkerSprite.x += velocity * Math.sign(xVector);
-        }
-
-        if (Math.abs(yVector) < velocity) {
-          this.state.checkerSprite.y = targetPosition[1];
-        } else {
-          this.state.checkerSprite.y += velocity * Math.sign(yVector);
-        }
-      }
+      this.advanceChecker(targetPosition);
     }
 
     this.renderer.render(this.stage);
   },
 
+  /*
+  * Advances the checker sprite toward the target position
+  *
+  * @param {Array} currentPosition
+  * @param {Array} targetPosition
+  */
+  advanceChecker (targetPosition) {
+    let currentPosition = [this.state.checkerSprite.x, this.state.checkerSprite.y]
+    let velocity = 2;
+
+    if (currentPosition !== targetPosition) {
+      let xVector = targetPosition[0] - currentPosition[0];
+      let yVector = targetPosition[1] - currentPosition[1];
+
+      if (Math.abs(xVector) < velocity) {
+        this.state.checkerSprite.x = targetPosition[0];
+      } else {
+        this.state.checkerSprite.x += velocity * Math.sign(xVector);
+      }
+
+      if (Math.abs(yVector) < velocity) {
+        this.state.checkerSprite.y = targetPosition[1];
+      } else {
+        this.state.checkerSprite.y += velocity * Math.sign(yVector);
+      }
+    }
+  },
+
   render() {
     return <div className="checker" ref="gameCanvas"></div>
   }
-
 
 });
