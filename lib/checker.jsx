@@ -12,6 +12,7 @@ export default React.createClass({
   componentDidMount() {
     // Create PIXI render. This is the display area, so match to the size of the board.
     this.renderer = PIXI.autoDetectRenderer(this.props.boardSize, this.props.boardSize, {transparent: true}, true);
+    this.renderer.autoResize = true;
     this.refs.gameCanvas.getDOMNode().appendChild(this.renderer.view);
 
     // Create Container where the checker sprite will live
@@ -43,6 +44,9 @@ export default React.createClass({
   * Moves sprite toward target position. Called 60 times per second
   */
   animate() {
+    let boardSizePixels = this.props.boardSize;
+    this.renderer.resize(boardSizePixels, boardSizePixels);
+
     this.frame = requestAnimationFrame(this.animate);
 
     let squareSize = this.props.squareSize;
