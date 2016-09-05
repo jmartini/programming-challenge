@@ -12,6 +12,10 @@
   margin: 0 auto;
 }
 
+.checker {
+  position: absolute;
+}
+
 .controls {
   text-align: center;
 }

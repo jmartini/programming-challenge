@@ -2,6 +2,7 @@ import React from 'react';
 //notice we use the relative path syntax when loading local files
 import Square from './example-square'
 import isPositionInCycle from './cycleChecker'
+import Checker from './checker';
 
 export default React.createClass({
     getInitialState() {
@@ -38,6 +39,7 @@ export default React.createClass({
         };
         return <div className="board" style={style}>
             {squares}
+            <Checker boardSize={size} checkerTargetPosition={this.props.checkerPosition} squareSize={this.props.squareSize}/>
         </div>;
     }
 });
