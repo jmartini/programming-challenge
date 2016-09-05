@@ -40,7 +40,8 @@ export default React.createClass({
         return <div className="board" style={style}>
             {squares}
             <Checker boardSize={size} checkerTargetPosition={this.props.checkerPosition}
-              squareSize={this.props.squareSize} playing={this.props.playing}/>
+              squareSize={this.props.squareSize} playing={this.props.playing}
+              snapPosition={this.props.snapPosition}/>
         </div>;
     }
 });

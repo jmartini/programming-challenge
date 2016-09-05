@@ -45,14 +45,16 @@ export default React.createClass({
   animate() {
     this.frame = requestAnimationFrame(this.animate);
 
-    if (this.props.playing) {
-      let squareSize = this.props.squareSize;
-      let targetPosition = this.props.checkerTargetPosition;
-      let currentPosition = [this.state.checkerSprite.x, this.state.checkerSprite.y]
+    let squareSize = this.props.squareSize;
+    let targetPosition = this.props.checkerTargetPosition;
+    let currentPosition = [this.state.checkerSprite.x, this.state.checkerSprite.y]
 
-      // Translate targetPosition, which is in square index, to pixels
-      targetPosition = targetPosition.map(function(x) {return x * squareSize});
-
+    // Translate targetPosition, which is in square index, to pixels
+    targetPosition = targetPosition.map(function(x) {return x * squareSize});
+    if (this.props.snapPosition) {
+      this.state.checkerSprite.x = targetPosition[0];
+      this.state.checkerSprite.y = targetPosition[1];
+    } else if (this.props.playing) {
       let velocity = 2;
 
       if (currentPosition != targetPosition) {

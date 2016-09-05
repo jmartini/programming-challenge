@@ -15,6 +15,7 @@ let Main = React.createClass({
             size: this.props.size,
             squareSize: this.props.squareSize,
             playing: false,
+            reset: true,
             // checkerPosition is [x, y] position on board
             checkerPosition: [0, 0],
             squareDirections: []
@@ -54,6 +55,12 @@ let Main = React.createClass({
 
     componentDidMount: function() {
       this.interval = setInterval(this.tick, 1000);
+    },
+
+    componentDidUpdate: function() {
+      // Called after render(). If we reset on the last render call, we want
+      // to go back to regular play mode.
+      this.state.reset = false;
     },
 
     /*
@@ -111,7 +118,7 @@ let Main = React.createClass({
         return <div>
             <Board size={this.state.size} squareSize={this.state.squareSize}
               checkerPosition={this.state.checkerPosition} squareDirections={this.state.squareDirections}
-              checkerOnBoard={this.isCheckerOnBoard()} playing={this.state.playing}/>
+              checkerOnBoard={this.isCheckerOnBoard()} playing={this.state.playing} snapPosition={this.state.reset}/>
             <Controls control={this} playing={this.state.playing}/>
 
             <Sound url='./assets/move.wav' playStatus={playStatusMove} />
@@ -134,6 +141,7 @@ let Main = React.createClass({
         let yPosition = Math.floor(Math.random() * this.state.size);
         this.state.checkerPosition[0] = xPosition;
         this.state.checkerPosition[1] = yPosition;
+        this.state.reset = true;
         this.setState(this.state);
     },
 
