@@ -3,6 +3,10 @@
     height: 100%;
 }
 
+h1 {
+  text-align: center;
+}
+
 .square {
     border: 1px solid #777777;
     float: left;

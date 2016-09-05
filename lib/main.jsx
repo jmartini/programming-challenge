@@ -116,6 +116,7 @@ let Main = React.createClass({
         Sound.status.STOPPED;
 
         return <div>
+            <h1>Jibo Programming Challenge</h1>
             <Board size={this.state.size} squareSize={this.state.squareSize}
               checkerPosition={this.state.checkerPosition} squareDirections={this.state.squareDirections}
               checkerOnBoard={this.isCheckerOnBoard()} playing={this.state.playing} snapPosition={this.state.reset}/>
